@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<Text
+  style={
+    Object {
+      "color": "#02181a",
+      "fontFamily": "Red Hat Display",
+      "fontSize": 14,
+      "letterSpacing": 0.7,
+      "lineHeight": 20,
+      "textTransform": "uppercase",
+    }
+  }
+>
+  Snapshot
+</Text>
+`;

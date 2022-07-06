@@ -1,0 +1,6 @@
+*.md
+.github
+.yarn
+README_starter.md
+android
+ios

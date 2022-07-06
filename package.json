@@ -1,0 +1,87 @@
+{
+  "name": "ReactNativeStarter",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "react-native start",
+    "ios": "react-native run-ios",
+    "android": "react-native run-android",
+    "test": "jest",
+    "setup": "npm install && cd ios && pod install",
+    "type-check": "tsc --skipLibCheck",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "lint-fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
+    "format": "prettier --write .",
+    "check-format": "prettier --check .",
+    "storybook": "start-storybook -p 7007",
+    "build-storybook": "build-storybook",
+    "generate-storybook": "node scripts/generateStorybook.js"
+  },
+  "dependencies": {
+    "@apollo/client": "^3.5.6",
+    "@fortawesome/fontawesome-svg-core": "^1.2.36",
+    "@fortawesome/free-solid-svg-icons": "^5.15.4",
+    "@fortawesome/react-native-fontawesome": "^0.2.7",
+    "@react-navigation/bottom-tabs": "^6.0.9",
+    "@react-navigation/native": "^6.0.6",
+    "@react-navigation/native-stack": "^6.2.5",
+    "@sentry/react-native": "^3.2.13",
+    "graphql": "^16.2.0",
+    "react": "17.0.2",
+    "react-native": "0.66.4",
+    "react-native-config": "^1.4.5",
+    "react-native-safe-area-context": "^3.3.2",
+    "react-native-screens": "^3.10.1",
+    "react-native-svg": "^12.1.1",
+    "twrnc": "^2.2.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.9",
+    "@babel/runtime": "^7.12.5",
+    "@react-native-community/eslint-config": "^2.0.0",
+    "@storybook/addon-actions": "^5.3",
+    "@storybook/addon-knobs": "^5.3",
+    "@storybook/addon-links": "^5.3",
+    "@storybook/addon-ondevice-actions": "^5.3.23",
+    "@storybook/addon-ondevice-knobs": "^5.3.25",
+    "@storybook/react-native": "^5.3.25",
+    "@storybook/react-native-server": "^5.3.23",
+    "@types/jest": "^26.0.23",
+    "@types/react-native": "^0.66.4",
+    "@types/react-test-renderer": "^17.0.1",
+    "@typescript-eslint/eslint-plugin": "^5.10.0",
+    "@typescript-eslint/parser": "^5.10.0",
+    "babel-jest": "^26.6.3",
+    "babel-loader": "^8.2.3",
+    "babel-plugin-module-resolver": "^4.1.0",
+    "eslint": "^8.7.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-tsdoc": "^0.2.14",
+    "jest": "^26.6.3",
+    "metro-react-native-babel-preset": "^0.66.2",
+    "react-dom": "17.0.2",
+    "react-native-svg-transformer": "^1.0.0",
+    "react-test-renderer": "17.0.2",
+    "typescript": "^4.5.5"
+  },
+  "resolutions": {
+    "@types/react": "^17"
+  },
+  "jest": {
+    "preset": "react-native",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ],
+    "setupFilesAfterEnv": [
+      "<rootDir>/__mocks__/globalMock.js"
+    ],
+    "transformIgnorePatterns": [
+      "/node_modules/(?!(react-native|@react-native|@fortawesome/react-native-fontawesome)/)"
+    ]
+  }
+}

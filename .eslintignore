@@ -1,0 +1,6 @@
+*.config.js
+.eslintrc.js
+__mocks__/globalMock.js
+node_modules
+src/theme/index.ts
+src/theme/tailwind.config.ts
