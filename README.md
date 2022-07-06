@@ -1,98 +1,181 @@
-# React Native Starter
+# ReactNativeDemo
 
-![CI status](https://github.com/newaperio/react-native-starter/workflows/CI/badge.svg)
+_Use this introductory section to give the project's elevator pitch. Explain the idea. What are we building? Who is it for? What problems does it solve? What are the primary, proprietary aspects of the technology?_
 
-![Multiple devices running the React Native Starter app](https://user-images.githubusercontent.com/423798/151121628-bb2b6f20-5ec1-43b0-aed3-70598364ef9b.jpeg)
+## Preflight
 
-_Mockup by [Previewed]_
+To develop and run this app, a few dependencies are required. To check if you have them installed, run the preflight script:
 
-This repo contains the base app we use to get our React Native apps started at [NewAperio].
+```sh
+./bin/preflight.sh
+```
 
-The goal of this repo is to enable our development teams to start fast with a solid foundation. This app is updated with new releases and includes the boilerplate configuration we typically use when bootstrapping new products.
+This will report which dependencies, if any, still needs to be installed and configured.
 
-## Technologies
+If all dependencies are present, it'll run `asdf` to install language versions.
 
-This project bootstraps the following technologies using our defaults:
+### Prerequisites
 
-- [React Native] for developing cross-platform mobile apps
-- [TypeScript] for writing type-safe JavaScript
-- [Apollo Client] for declaratively fetching data from a GraphQL API
-- [Storybook] for isolating components during development and QA
-- [React Navigation] for routing and navigation
-- [react-native-svg] for SVG support
-- [react-native-config] for exposing environment variables
-- [Babel] for next generation JavaScript compilation
-- [Metro] for code-bundling
-- [Jest] for testing
-- [Sentry] for error reporting
-- [asdf] for managing runtime versions
-- [Tailwind React Native Classnames], a styling toolkit based on [TailwindCSS]
-- [FontAwesome], an extensive icon set
-- [GitHub Actions] for CI
-- A suite of code quality tools:
-  - [ESLint] for code linting
-  - [Prettier] for code formatting
-  - [EditorConfig] to maintain code style across editors
+If the preflight script reports any missing executables or you run into any other errors, here are the prerequisites for running the app. Check that you have all of these installed.
 
-## Demo App
+1. [asdf], which manages language versions. We recommend [installing with the `git` method][asdf-install]. We also need plugins for the versions specified in `.tool-versions` (the preflight script will install these for you). Don’t forget to [load asdf in your shell][asdf-shell].
+    - `gnupg` is [required][node-req] to verify Node.js; `brew install gnupg`
+2. [Watchman], a filesystem watcher that will improve your developer experience while working on this project. You can install this with [Homebrew][brew-watchman]: `brew install watchman`.
+3. [Xcode], which is required for building the iOS version of the project. The best way to install it is via the [Mac App Store][mas-xcode].
+4. [Cocoapods], for managing iOS dependencies. It is recommended to install this using the default system Ruby: `sudo gem install cocoapods`.
+5. The Java Development Kit (JDK), version 8 or newer. This can be installed with [Homebrew][brew-jdk]: `brew install --cask adoptopenjdk/openjdk/adoptopenjdk8`.
+6. [Android Studio], which is required for building the Android version of the project. You can install this application using [Homebrew][brew-android-studio]: `brew install android-studio`.
+    - Be sure to launch Android Studio once it's installed and complete the installation wizard—the defaults are fine.
+    - The [Android 10 (Q) SDK][android-10] is required by React Native and not installed by default. Open the SDK Manager from Android Studio (**Tools > SDK Manager**) and install **Android 10 (Q)** if necessary.
+    - You'll need some Android tool paths in your `$PATH` — the preflight script can guide you here if necessary.
 
-The app that comes with this starter is meant to clearly demostrate different features of the project and should prove useful as a jumping-off point:
+## Setup
 
-- Recommended project layout (components, screens, navigation, etc.)
-- Tab bar customizations
-- Data fetching from a GraphQL API
-- Tailwind configuration
-- Using SVG image assets
-- Embedding and using fonts
-- Writing tests and stories
+Once you've finished preflight setup, run the setup script:
 
-## Usage
+```sh
+npm run setup
+```
 
-The repo is setup as a [GitHub template] to make it easy to get started.
+This will do two things:
 
-1. Click the ["Use this template" button]. This will setup a new repo with a clean history.
-2. Clone the new repo locally.
-3. Run the init script to rename the starter project and do some other housekeeping: `./bin/init.sh MyApp com.mycompany`.
-4. Initialize Sentry if you plan to use it (can be done at any time): `npx @sentry/wizard -i reactNative -p ios android`
-5. Commit the result: `git add --all . && git commit -m "Initalize starter project"`.
+1. Run `npm install` to fetch Node.js dependencies
+2. Run `pod install` to fetch iOS dependencies
 
-## License
+## Running
 
-React Native Starter is Copyright © 2022 NewAperio. It is free software, and may be redistributed under the terms specified in the [LICENSE](/LICENSE) file.
+### Bundling
+
+To start the Metro bundler, run the start command:
+
+```sh
+npm start
+```
+
+Note: If you run the app without starting Metro, a Metro instance will be started for you in your default terminal app.
+
+### In a Simulator
+
+You can launch the iOS or Android app in a simulator with `npm run ios` or `npm run android`.
+
+## Contributing
+
+Refer to our [contributing guide] for our current standard practices for contributing new features and opening pull requests.
+
+## Project Structure
+
+Whether you're just get oriented to the project or need a helpful reminder of where something should go, here's a list of the most commonly-used project directories.
+
+- `android`: The Android wrapper project.
+- `assets`: Static assets such as images and fonts. Each asset type gets a dedicated directory within `assets`.
+- `bin`: Shell scripts used to bootstrap and manage the project.
+- `ios`: The iOS wrapper project. Contains a `Podfile` to manage iOS dependencies.
+- `scripts`: Node.js code that is useful for development, e.g. code generation scripts.
+- `src`: The vast majority of the the application code lives in here.
+  - `components`: React components that are meant to be used throughout the app.
+  - `graphql`: Definitions and types for GraphQL queries, mutations, and subscriptions.
+  - `navigation`: React Navigation navigators that define how users move around the app.
+  - `screens`: React components representing screens of the app, including their logic, dependencies, and composition.
+  - `services`: Tools for interacting with the outside world, e.g. HTTP communication and device storage.
+  - `theme`: Code used to shape the overall look and feel of the app, including color definitions and the Tailwind configuration.
+  - `utils:` Miscellaneous utility functions for things like formatting, sorting, etc.
+- `storybook`: Storybook initialization, addons, and decorators.
+
+The root directory contains the app's entry point (`index.ts`) and root component (`App.tsx`). It also contains configurations for various tools used to build and develop the app.
+
+### Typing
+
+This app is written in TypeScript wherever possible, and new functions should be fully typed. The [TypeScript Language Server] can be integrated into your editor/IDE for on-the-fly type checking (and more!). You can also check types on demand:
+
+```sh
+npm run type-check
+```
+
+### Testing
+
+This project uses test-driven and snapshot-based development. Tests are colocated with the files they test, i.e. `Button.test.tsx` should live in the same directory as `Button.tsx`.
+
+To run the test suite, use Jest:
+
+```sh
+npm test
+```
+
+Test run as part of our CI pipeline.
+
+Refer to our [testing guide] for our current standard practices on test-driven development.
+
+### Linting
+
+We use ESLint to ensure code meets our standards for quality and consistency. It's useful to run ESLint in your editor/IDE, but you can also lint the codebase at any time:
+
+```sh
+npm run lint
+```
+
+ESLint has the capability to fix some linting errors:
+
+```sh
+npm run lint-fix
+```
+
+Linting runs as part of our CI pipeline.
+
+### Formatting
+
+We use Prettier so that we don't have to think about code formatting. You can set up your editor/IDE to run Prettier on save, but you can also invoke it manually on the entire codebase:
+
+```sh
+npm run format
+```
+
+If you just want to check if anything is incorrectly formatted, you can do that:
+
+```sh
+npm run check-format
+```
+
+Formatting is checked as part of our CI pipeline.
+
+### Storybook
+
+Each app-wide React component, i.e. those in `src/components`, should have an associated story that demonstrates the different states and capabilities that component has. Stories are colocated with the components they are for, i.e. `Button.stories.tsx` should live in the same directory as `Button.tsx`.
+
+When you add a new story, run the generator script to add it to the list of stories that gets loaded:
+
+```sh
+npm run generate-storybook
+```
+
+You can run the Storybook web app locally to more easily interact with the storybook:
+
+```sh
+npm run storybook
+```
+
+## Template
+
+This app is based on the NewAperio [React Native Starter] project, which is updated from time to time. Refer to that project for documentation and routine updates.
 
 ## About NewAperio
 
-React Native Starter is built by NewAperio, LLC.
+ReactNativeDemo is built by [NewAperio], LLC.
 
-NewAperio is a web and mobile design and development studio. We offer [expert React Native][services] development as part of our portfolio of services. [Get in touch][contact] to see how our team can help you.
-
-Check out our other starter projects:
-
-- [🔥 Phoenix Starter]
-
-[previewed]: https://previewed.app/template/3F40C34E
-[newaperio]: https://newaperio.com?utm_source=github
-[react native]: https://reactnative.dev/
-[typescript]: https://www.typescriptlang.org/
-[apollo client]: https://www.apollographql.com/docs/react/
-[storybook]: https://storybook.js.org/
-[react navigation]: https://reactnavigation.org/
-[react-native-svg]: https://github.com/react-native-svg/react-native-svg
-[react-native-config]: https://github.com/luggit/react-native-config
-[babel]: https://babeljs.io/
-[metro]: https://facebook.github.io/metro/
-[jest]: https://jestjs.io/
-[sentry]: https://sentry.io/welcome/
 [asdf]: https://asdf-vm.com/
-[tailwind react native classnames]: https://github.com/jaredh159/tailwind-react-native-classnames
-[fontawesome]: https://fontawesome.com/
-[tailwindcss]: https://tailwindcss.com/
-[github actions]: https://github.com/features/actions
-[eslint]: https://eslint.org/
-[prettier]: https://prettier.io/
-[editorconfig]: https://editorconfig.org/
-[github template]: https://docs.github.com/en/free-pro-team@latest/github/creating-cloning-and-archiving-repositories/creating-a-repository-from-a-template#creating-a-repository-from-a-template
-["use this template" button]: https://github.com/newaperio/react-native/generate
-[services]: https://newaperio.com/services/#mobile-development?utm_source=github
-[contact]: https://newaperio.com/contact?utm_source=github
-[🔥 Phoenix Starter]: https://github.com/newaperio/phoenix_starter
+[asdf-install]: https://asdf-vm.com/#/core-manage-asdf?id=install
+[asdf-shell]: https://asdf-vm.com/#/core-manage-asdf?id=add-to-your-shell
+[node-req]: https://github.com/asdf-vm/asdf-nodejs#install
+[watchman]: https://facebook.github.io/watchman/
+[brew-watchman]: https://formulae.brew.sh/formula/watchman
+[xcode]: https://developer.apple.com/xcode/
+[mas-xcode]: https://apps.apple.com/us/app/xcode/id497799835?mt=12
+[cocoapods]: https://cocoapods.org/
+[brew-jdk]: https://formulae.brew.sh/cask/temurin
+[android studio]: https://developer.android.com/studio/
+[brew-android-studio]: https://formulae.brew.sh/cask/android-studio
+[android-10]: https://developer.android.com/about/versions/10/setup-sdk
+[contributing guide]: https://github.com/newaperio/guides/blob/master/contributing/README.md
+[typescript language server]: https://github.com/typescript-language-server/typescript-language-server
+[testing guide]: https://github.com/newaperio/guides/blob/master/testing/README.md
+[react native starter]: https://github.com/newaperio/react-native-starter
+[newaperio]: https://newaperio.com
