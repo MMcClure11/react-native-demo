@@ -3,12 +3,14 @@ import React from "react"
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import {
   faBook,
+  faClock,
   faHome,
   faUserAstronaut,
 } from "@fortawesome/free-solid-svg-icons"
 
 import Home from "~screens/Home"
 import PlanetsNavigator from "~navigation/PlanetsNavigator"
+import TimersNavigator from "~navigation/TimersNavigator"
 import { colors, tw } from "~theme"
 
 import StorybookRootUI from "../../storybook"
@@ -32,6 +34,8 @@ const AppNavigator: React.FC = () => {
             icon = faUserAstronaut
           } else if (route.name === "Storybook") {
             icon = faBook
+          } else if (route.name === "Timers") {
+            icon = faClock
           }
 
           if (!icon) return null
@@ -40,6 +44,7 @@ const AppNavigator: React.FC = () => {
         tabBarStyle: tw`bg-oceanside`,
       })}>
       <Tab.Screen name="Home" component={Home} />
+      <Tab.Screen name="Timers" component={TimersNavigator} />
       <Tab.Screen name="Planets" component={PlanetsNavigator} />
       <Tab.Screen name="Storybook" component={StorybookRootUI} />
     </Tab.Navigator>
