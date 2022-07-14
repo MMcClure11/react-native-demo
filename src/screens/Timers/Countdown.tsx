@@ -15,23 +15,14 @@ const Countdown = ({ navigation }: Props) => {
   const initialBarWidth = Dimensions.get("screen").width
   const barWidth = useRef(new Animated.Value(initialBarWidth - 32)).current
 
-  const timer = useRef<NodeJS.Timeout>()
-
   useEffect(() => {
-    timer.current && clearInterval(timer.current)
-
-    const id = setTimeout(() => {
+    setTimeout(() => {
       if (timerSeconds > 0) {
         setTimerSeconds(timerSeconds - 1)
       } else {
-        if (timer.current) clearInterval(timer.current)
         navigation.navigate("Empty")
       }
     }, 1000)
-
-    timer.current = id
-
-    return () => timer.current && clearInterval(timer.current)
   }, [timerSeconds])
 
   useEffect(() => {
