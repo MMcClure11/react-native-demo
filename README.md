@@ -1,6 +1,6 @@
 # ReactNativeDemo
 
-_Use this introductory section to give the project's elevator pitch. Explain the idea. What are we building? Who is it for? What problems does it solve? What are the primary, proprietary aspects of the technology?_
+A demo React Native app bootstrapped using NewAperio’s [react-native-starter](https://github.com/newaperio/react-native-starter). Useful for demonstrating code for blog posts as teaching material.
 
 ## Preflight
 
